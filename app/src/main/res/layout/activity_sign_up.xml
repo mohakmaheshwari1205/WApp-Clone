@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignIn"
-    android:background="@color/colorPrimary"
+    android:background="@color/signup_inBackground"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -31,33 +31,34 @@
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:ems="10"
             android:hint="Name"
             android:inputType="textPersonName"
-            android:textColorHint="#FFFFFF" />
+            android:textColorHint="#000000" />
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:padding="6dp"
-            android:textColorHint="#FFFFFF" />
+            android:textColorHint="#000000" />
 
         <EditText
             android:id="@+id/etPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:padding="6dp"
-            android:textColorHint="#FFFFFF" />
+            android:textColorHint="#000000" />
 
         <TextView
             android:id="@+id/alreadyHaveAnAccount"
@@ -67,7 +68,9 @@
             android:layout_margin="10dp"
             android:padding="3dp"
             android:text="Already have an account ?"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000"
+            android:textColorHint="#FFFFFF"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnSignUp"

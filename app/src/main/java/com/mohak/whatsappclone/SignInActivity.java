@@ -25,6 +25,8 @@ public class SignInActivity extends AppCompatActivity {
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        getSupportActionBar().hide();
+
         auth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(SignInActivity.this);
@@ -34,22 +36,27 @@ public class SignInActivity extends AppCompatActivity {
         binding.btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.show();
-                auth.signInWithEmailAndPassword(binding.etEmail.getText().toString()
-                ,binding.etPass.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressDialog.dismiss();
-                                if(task.isSuccessful()){
-                                    Intent intent = new Intent(SignInActivity.this , MainActivity.class);
-                                    startActivity(intent);
+                if(binding.etEmail.getText().toString().length()==0 || binding.etPass.getText().toString().length()==0)
+                    Toast.makeText(SignInActivity.this, "All inputs required!!", Toast.LENGTH_SHORT).show();
+                else{
+                    progressDialog.show();
+                    auth.signInWithEmailAndPassword(binding.etEmail.getText().toString()
+                            ,binding.etPass.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressDialog.dismiss();
+                                    if(task.isSuccessful()){
+                                        Intent intent = new Intent(SignInActivity.this , MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                    else{
+                                        Toast.makeText(SignInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                                else{
-                                    Toast.makeText(SignInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                            });
+                }
+
             }
         });
 
@@ -61,10 +68,10 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-        if(auth.getCurrentUser()!=null){
-            Intent intent = new Intent(SignInActivity.this , MainActivity.class);
-            startActivity(intent);
-        }
+//        if(auth.getCurrentUser()!=null){
+//            Intent intent = new Intent(SignInActivity.this , MainActivity.class);
+//            startActivity(intent);
+//        }
 
     }
 }
